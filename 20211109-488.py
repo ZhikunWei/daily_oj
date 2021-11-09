@@ -34,8 +34,8 @@ class Solution:
                 if hand[j] not in rec:
                     rec[hand[j]] = 0
                 rec[hand[j]] += 1
-                # if rec[hand[j]] > 1:
-                #     continue
+                if rec[hand[j]] > 1:
+                    continue
                 new_board = board[:i] + hand[j]
                 if i < len(board):
                     new_board += board[i:]
