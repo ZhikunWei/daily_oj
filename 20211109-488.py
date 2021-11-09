@@ -1,3 +1,4 @@
+g_cnt = 0
 class Solution:
     def findMinStep(self, board: str, hand: str) -> int:
         def eliminate(s):
@@ -28,7 +29,13 @@ class Solution:
         # print(board, hand)
         results = []
         for i in range(len(board)+1):
+            rec = {}
             for j in range(len(hand)):
+                if hand[j] not in rec:
+                    rec[hand[j]] = 0
+                rec[hand[j]] += 1
+                # if rec[hand[j]] > 1:
+                #     continue
                 new_board = board[:i] + hand[j]
                 if i < len(board):
                     new_board += board[i:]
@@ -38,9 +45,12 @@ class Solution:
                 used_ball = self.findMinStep(new_board, new_hand)
                 if used_ball >= 0:
                     results.append(used_ball)
+                global  g_cnt
+                g_cnt += 1
         if len(results) == 0:
             return -1
         else:
             return min(results) + 1
 
 print(Solution().findMinStep('WWRRBBWW', 'WRBRW'))
+print(g_cnt)
